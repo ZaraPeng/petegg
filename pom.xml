@@ -134,7 +134,12 @@
 			<artifactId>log4j</artifactId>
 			<version>${log4j.version}</version>
 		</dependency>
-
+		<!-- netty-socketIO -->
+		<dependency>
+		    <groupId>com.corundumstudio.socketio</groupId>
+		    <artifactId>netty-socketio</artifactId>
+		    <version>1.6.5</version>
+		</dependency>
 
 		<!-- 格式化对象，方便输出日志 -->
 		<dependency>
