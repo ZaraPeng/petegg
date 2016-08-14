@@ -3,7 +3,7 @@ package petegg.service;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import petegg.dao.BaseTest;
+import petegg.BaseTest;
 
 import com.petegg.service.PetInfoService;
 

@@ -3,6 +3,8 @@ package petegg.dao;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import petegg.BaseTest;
+
 import com.petegg.dao.PetInfoMapper;
 
 

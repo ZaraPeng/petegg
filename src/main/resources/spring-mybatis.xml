@@ -27,7 +27,9 @@
 				<value>classpath:jdbc.properties</value>
 			</list>
 		</property>
+		<property name="ignoreUnresolvablePlaceholders" value="true" />
 	</bean>
+	
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"  
         destroy-method="close">  
         <property name="driverClassName" value="${driver}" />  

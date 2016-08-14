@@ -18,8 +18,7 @@
 	<!-- 设置注入扫描包的根目录 -->
 	<context:component-scan base-package="com.petegg" />
 	
-  	<!-- <context:annotation-config /> -->
-  	
+	
   	<!-- 启动SpringMVC的注解功能，完成请求和注解POJO的映射 -->  
     <!-- <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />   -->
     <bean id="mappingJackson2HttpMessageConverter"  
