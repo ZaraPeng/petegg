@@ -2,9 +2,13 @@ package com.petegg.netty.handler;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import com.alibaba.fastjson.JSONObject;
+import com.petegg.entity.PetInfo;
 import com.petegg.netty.domain.GameRequest;
 import com.petegg.netty.domain.GameResponse;
+import com.petegg.service.PetInfoService;
 
 /**
  * <p>Title: InitHandler</p>
@@ -16,10 +20,15 @@ import com.petegg.netty.domain.GameResponse;
  */
 public class InitHandler implements GameHandler{
   protected Logger logger = LoggerFactory.getLogger(getClass());
+  
+  @Autowired
+  private PetInfoService petInfoService;
 
   public void execute(GameRequest request, GameResponse response) {
-      this.logger.error(request.readString());
-      response.write("I am ok!");
+      this.logger.info(request.readString());
+//      response.write("I am ok!");
+      PetInfo petinfo = petInfoService.getById(1);
+      response.write(JSONObject.toJSONString(petinfo));
   }
 }
 

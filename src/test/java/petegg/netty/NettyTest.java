@@ -31,7 +31,7 @@ public class NettyTest extends BaseTest {
 
   @Test
   public void testRun() throws Exception {
-    NettyServer server = new NettyServer(8080);
+    NettyServer server = new NettyServer(8111);
     server.setInitializer(serverInitializer);
     server.run();
     System.out.println("server is running……");
