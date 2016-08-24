@@ -1,7 +1,7 @@
 package com.petegg.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import com.petegg.dao.PetInfoMapper;
 import com.petegg.entity.PetInfo;
@@ -14,8 +14,8 @@ import com.petegg.entity.PetInfo;
  * @author    Peng Yanan
  * @date      2016年8月13日
  */
-@Service
-public class PetInfoService {
+@Component
+public class PetInfoService extends BaseService<PetInfo>{
   
   @Autowired
   private PetInfoMapper petInfoMapper;

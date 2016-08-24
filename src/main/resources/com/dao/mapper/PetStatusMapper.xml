@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.petegg.dao.PetStatusMapper">
+
+	<insert id="add" parameterType="com.petegg.entity.PetStatus"
+		useGeneratedKeys="true" keyProperty="id">
+		<![CDATA[
+		insert into
+		pet_status(pet_info_id, hunger, clean, smarts, active, energy, happy)
+		values(#{petInfoId}, #{hunger},
+		#{clean}, #{smarts}, #{active},
+		#{energy}, #{happy})
+		]]>
+	</insert>
+
+	<update id="update" parameterType="com.petegg.entity.PetStatus">
+		<![CDATA[
+		update pet_status
+		set
+		hunger=#{hunger}, clean=#{clean}, smarts=#{smarts}, active=#{active},
+		energy=#{energy}, happy=#{happy} where pet_info_id=#{petInfoId}
+		]]>
+	</update>
+
+	<select id="getByPetId" resultType="com.petegg.entity.PetStatus">
+		<![CDATA[
+		select * from pet_status where pet_info_id=#{petId}
+		]]>
+	</select>
+
+</mapper>
