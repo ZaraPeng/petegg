@@ -1,12 +1,9 @@
 package com.petegg.service;
 
 import org.apache.commons.lang3.ObjectUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.alibaba.fastjson.JSONObject;
 import com.petegg.dao.PetStatusMapper;
 import com.petegg.entity.PetStatus;
 
@@ -28,34 +25,11 @@ import com.petegg.entity.PetStatus;
  * @date 2016年8月24日
  */
 @Component
-public class PetStatusService {
-
-  private Logger logger = LoggerFactory.getLogger(PetStatusService.class);
+public class PetStatusService extends BaseService<PetStatus>{
 
   @Autowired
   private PetStatusMapper petStatusMapper;
 
-  /**
-   * 
-   * <p>
-   * Description: 洗澡
-   * </p>
-   * 
-   * @param petId
-   * @return
-   * @author Peng Yanan
-   * @date 2016年8月24日
-   */
-  public PetStatus washAction(long petId) {
-    PetStatus obj = petStatusMapper.getByPetId(petId);
-    logger.info("数据库get {}",JSONObject.toJSONString(obj));
-    obj.setClean(800l);
-    obj.setHappy(600l);
-    logger.info("更新之后 {}",JSONObject.toJSONString(obj));
-    if (petStatusMapper.update(obj) > 0)
-      logger.info("更新数据成功");// 更新数据
-    return getPetStatus(petId);
-  }
 
   /**
    * 

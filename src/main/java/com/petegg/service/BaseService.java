@@ -27,7 +27,7 @@ public class BaseService<T> {
    * @author Peng Yanan
    * @date      2016年8月24日
    */
-  protected boolean add(T obj) {
+  public boolean add(T obj) {
     if (baseMapper.add(obj) > 0)
       return true;
     return false;
@@ -41,7 +41,7 @@ public class BaseService<T> {
    * @author Peng Yanan
    * @date      2016年8月24日
    */
-  protected boolean update(T obj){
+  public boolean update(T obj){
     if (baseMapper.update(obj) > 0)
       return true;
     return false;

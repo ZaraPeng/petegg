@@ -19,14 +19,13 @@ import java.io.Serializable;
  * @author Peng Yanan
  * @date 2016年8月24日
  */
-public class BaseResponse<T> implements Serializable {
+public class BaseResponse implements Serializable {
 
   /** serialVersionUID */
   private static final long serialVersionUID = -2616552769881584041L;
 
   private int code;
   private String msg;
-  private T data;
 
   public int getCode() {
     return code;
@@ -42,14 +41,6 @@ public class BaseResponse<T> implements Serializable {
 
   public void setMsg(String msg) {
     this.msg = msg;
-  }
-
-  public T getData() {
-    return data;
-  }
-
-  public void setData(T data) {
-    this.data = data;
   }
 
 }
