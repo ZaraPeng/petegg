@@ -209,7 +209,7 @@
 		    <groupId>org.codehaus.jackson</groupId>  
 		    <artifactId>jackson-mapper-lgpl</artifactId>  
 		    <version>1.9.6</version>  
-		</dependency>   -->
+		</dependency> -->
 	</dependencies>
 
 	<build>

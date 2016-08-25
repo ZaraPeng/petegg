@@ -2,6 +2,8 @@ package com.petegg.socketio;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.alibaba.fastjson.JSONObject;
 import com.corundumstudio.socketio.AckRequest;
@@ -12,6 +14,7 @@ import com.corundumstudio.socketio.listener.ConnectListener;
 import com.corundumstudio.socketio.listener.DataListener;
 import com.corundumstudio.socketio.listener.DisconnectListener;
 import com.petegg.Constants;
+import com.petegg.redis.UserInfoRedisClient;
 import com.petegg.socketio.request.LoginRequest;
 import com.petegg.socketio.response.LoginResponse;
 
@@ -32,8 +35,12 @@ import com.petegg.socketio.response.LoginResponse;
  * @author Peng Yanan
  * @date 2016年8月24日
  */
+@Component
 public class LoginEventServer {
   private static Logger log = LoggerFactory.getLogger(LoginEventServer.class);
+  
+  @Autowired
+  private UserInfoRedisClient redisClient;
 
   /**
    * 
@@ -57,7 +64,7 @@ public class LoginEventServer {
       public void onConnect(SocketIOClient client) {
         // 建立连接 把连接UUID和userID 联系起来
         LoginEventServer.log.info("建立起connect, sessionID={}", client.getSessionId().toString());
-        Constants.userInfoMap.put(client.getSessionId(), "");
+        
       }
     });
 
@@ -66,7 +73,7 @@ public class LoginEventServer {
       @Override
       public void onDisconnect(SocketIOClient client) {
         LoginEventServer.log.info("断开connect, sessionID={}", client.getSessionId().toString());
-        Constants.userInfoMap.remove(client.getSessionId());
+        redisClient.remove(client.getSessionId());
       }
     });
 
@@ -78,8 +85,11 @@ public class LoginEventServer {
           throws Exception {
         LoginEventServer.log.info("client[{}] 发送数据 [{}]", client.getSessionId(),
             JSONObject.toJSONString(data));
-        Constants.userInfoMap.put(client.getSessionId(), data.getOpenid());
-
+        redisClient.put(client.getSessionId(), data.getOpenid());
+        
+        // 业务逻辑 判断改用户是否登陆过
+        
+        
         LoginResponse response = new LoginResponse();
         response.setCode(Constants.CODE_SUCCESS);
         response.setMsg("登陆成功");

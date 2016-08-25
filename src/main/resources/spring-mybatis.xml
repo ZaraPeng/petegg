@@ -15,9 +15,6 @@
         http://www.springframework.org/schema/task 
         http://www.springframework.org/schema/task/spring-task.xsd">
         
-    <!-- <import resource="classpath:spring-mvc.xml" /> -->
-    
-    <context:component-scan base-package="com.petegg" />
     
     <!-- 导入properties配置文件 -->
 	<bean
@@ -63,7 +60,7 @@
 		<property name="dataSource" ref="dataSource" />
 		<property name="mapperLocations" value="classpath:com/dao/mapper/*.xml"></property>
 		<!--configLocation属性指定mybatis的核心配置文件  -->
-		<property name="configLocation" value="classpath:calm-config.xml" />
+		<property name="configLocation" value="classpath:mybatis-config.xml" />
 	</bean>
 		<!-- auto find mapper -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">

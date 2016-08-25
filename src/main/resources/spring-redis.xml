@@ -14,50 +14,45 @@
         http://www.springframework.org/schema/context/spring-context-3.1.xsd
         http://www.springframework.org/schema/task 
         http://www.springframework.org/schema/task/spring-task.xsd">
-        
-    
+
+
+	<!-- <context:component-scan base-package="com.petegg" /> -->
+
 	<!-- 导入properties配置文件 -->
 	<bean
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="locations">
 			<list>
-				<value>classpath:netty.properties</value>
+				<value>classpath:redis.properties</value>
 			</list>
 		</property>
 		<property name="ignoreUnresolvablePlaceholders" value="true" />
 	</bean>
 
-	<bean id="serverInitializer" class="com.petegg.netty.netty.ServerInitializer"
-		init-method="init">
-		<property name="timeout" value="${app.channel.readtimeout}" />
-		<property name="handlerDispatcher" ref="handlerDispatcher" />
-		<property name="requestType" value="${app.requestType}" />
+	<bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+		<property name="maxIdle" value="${redis.maxIdle}" />
+		<property name="maxTotal" value="${redis.maxActive}" />
+		<property name="maxWaitMillis" value="${redis.maxWait}" />
+		<property name="testOnBorrow" value="${redis.testOnBorrow}" />
+	</bean>
 
+	<bean id="connectionFactory"
+		class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+		<property name="hostName" value="${redis.host}" />
+		<property name="port" value="${redis.port}" />
+		<!-- <property name="password" value="${redis.password}" /> -->
+		<property name="timeout" value="${redis.timeout}" />
+		<property name="database" value="${redis.default.db}"></property>
+		<property name="poolConfig" ref="jedisPoolConfig" />
+	</bean>
+
+	<bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
+		<property name="connectionFactory" ref="connectionFactory" />
 	</bean>
 	
-	<bean id="handlerDispatcher" class="com.petegg.netty.dispatcher.HandlerDispatcher">
-		<property name="messageExecutor">
-			<bean class="com.petegg.netty.domain.FiexThreadPoolExecutor"
-				destroy-method="shutdown">
-				<constructor-arg value="${app.handler.pool.corePoolSize}" />
-				<constructor-arg value="${app.handler.pool.maximumPoolSize}" />
-				<constructor-arg value="${app.handler.pool.keepAliveSecond}" />
-				<constructor-arg value="${app.handler.pool.name}" />
-			</bean>
-		</property>
-		<property name="sleepTime" value="${app.handler.sleepTime}" />
-		<property name="handlerMap" ref="gameHandlerMap" />
+	<bean id="stringRedisTemplate" class="org.springframework.data.redis.core.StringRedisTemplate">
+		<property name="connectionFactory" ref="connectionFactory" />
 	</bean>
 
-	<bean id="gameHandlerMap" class="java.util.HashMap">
-		<constructor-arg>
-			<map>
-				<entry key="999">
-					<bean class="com.petegg.netty.handler.InitHandler">
-					</bean>
-				</entry>
-			</map>
-		</constructor-arg>
-	</bean>
 
 </beans>
