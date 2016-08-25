@@ -30,11 +30,11 @@ import com.petegg.service.PetInfoService;
 public class PetInfoRedisClientTest extends BaseTest {
 
   @Autowired
-  private PetInfoRedisClient redisClient;
+  private PetInfoRedisClient objRedisClient;
 
   @Autowired
   private IntegerRedisClient intRedis;
-  
+
   @Autowired
   private StringRedisClient stringRedis;
 
@@ -43,14 +43,14 @@ public class PetInfoRedisClientTest extends BaseTest {
 
   @Test
   public void stringPut() {
-    stringRedis.put("woainiya", "helloworld");
+    stringRedis.put("woainiya1111", "helloworld");
   }
 
   @Test
   public void stringGet() {
     System.out.println(stringRedis.get("123456"));
   }
-  
+
   @Test
   public void intPut() {
     intRedis.put("xx1111xxxxxxxx111111111", "xxxxxxxxx");
@@ -60,10 +60,25 @@ public class PetInfoRedisClientTest extends BaseTest {
   public void intGet() {
     System.out.println(intRedis.get("xx1111xxxxxxxx111111111"));
   }
-  
+
   @Test
-  public void remove(){
-//    intRedis.remove(100l);
+  public void remove() {
+    // intRedis.remove(100l);
+  }
+
+  @Test
+  public void objPut() {
+    objRedisClient.put("petinfo_id_2", petService.getById(1l));
+  }
+
+  @Test
+  public void objGet() {
+    System.out.println(objRedisClient.get("petinfo_id_2").toString());
   }
   
+  @Test
+  public void objRemove(){
+    objRedisClient.remove("petinfo_id_2");
+  }
+
 }

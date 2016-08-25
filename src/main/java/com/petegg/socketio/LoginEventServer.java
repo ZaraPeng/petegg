@@ -49,11 +49,12 @@ public class LoginEventServer {
    * </p>
    * 
    * @author Peng Yanan
+   * @throws InterruptedException 
    * @date 2016年8月24日
    */
-  public void start() {
+  public void start() throws InterruptedException {
     Configuration config = new Configuration();
-    config.setHostname("localhost");
+    config.setHostname("10.0.0.7");
     config.setPort(9092);
 
     final SocketIOServer server = new SocketIOServer(config);
@@ -73,7 +74,7 @@ public class LoginEventServer {
       @Override
       public void onDisconnect(SocketIOClient client) {
         LoginEventServer.log.info("断开connect, sessionID={}", client.getSessionId().toString());
-        redisClient.remove(client.getSessionId());
+        redisClient.remove(client.getSessionId().toString());
       }
     });
 
@@ -85,7 +86,7 @@ public class LoginEventServer {
           throws Exception {
         LoginEventServer.log.info("client[{}] 发送数据 [{}]", client.getSessionId(),
             JSONObject.toJSONString(data));
-        redisClient.put(client.getSessionId(), data.getOpenid());
+        redisClient.put(client.getSessionId().toString(), data.getOpenid());
         
         // 业务逻辑 判断改用户是否登陆过
         
@@ -98,5 +99,17 @@ public class LoginEventServer {
             JSONObject.toJSONString(response));
       }
     });
+    
+    // 开启服务
+    server.start();
+    
+    while(true){
+      Thread.sleep(1000);
+    }
   }
+  
+//  public static void main(String args[]) throws InterruptedException{
+//    LoginEventServer server = new LoginEventServer();
+//    server.start();
+//  }
 }

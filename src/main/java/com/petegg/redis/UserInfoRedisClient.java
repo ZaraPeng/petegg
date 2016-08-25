@@ -1,7 +1,5 @@
 package com.petegg.redis;
 
-import java.util.UUID;
-
 import org.springframework.stereotype.Component;
 
 /**
@@ -23,6 +21,6 @@ import org.springframework.stereotype.Component;
  */
 
 @Component
-public class UserInfoRedisClient extends AbstractRedisClient<UUID, String> {
+public class UserInfoRedisClient extends AbstractRedisClient<String, String> {
 
 }

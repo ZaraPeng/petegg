@@ -1,5 +1,7 @@
 package com.petegg.redis;
 
+import java.io.Serializable;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisOperations;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -24,21 +26,23 @@ import org.springframework.data.redis.core.ValueOperations;
  */
 public class AbstractRedisClient<K, V> {
   @Autowired
-  private RedisTemplate<K, V> redisTemplate;
+  private RedisTemplate<Serializable, Serializable> redisTemplate;
+  
   
   public void put(K k, V v) {
-    ValueOperations<K, V> valueOper = redisTemplate.opsForValue();
-    valueOper.set(k, v);
+    ValueOperations<Serializable, Serializable> valueOper = redisTemplate.opsForValue();
+    valueOper.set((Serializable) k, (Serializable) v);
   }
 
+  @SuppressWarnings("unchecked")
   public V get(K k) {
-    ValueOperations<K, V> valueOper = redisTemplate.opsForValue();
-    return valueOper.get(k);
+    ValueOperations<Serializable, Serializable> valueOper = redisTemplate.opsForValue();
+    return (V) valueOper.get(k);
   }
 
   public void remove(K k) {
-    ValueOperations<K, V> valueOper = redisTemplate.opsForValue();
-    RedisOperations<K, V> operations = valueOper.getOperations();
-    operations.delete(k);
+    ValueOperations<Serializable, Serializable> valueOper = redisTemplate.opsForValue();
+    RedisOperations<Serializable, Serializable> operations = valueOper.getOperations();
+    operations.delete((Serializable) k);
   }
 }

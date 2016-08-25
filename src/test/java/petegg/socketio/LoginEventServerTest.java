@@ -1,5 +1,6 @@
 package petegg.socketio;
 
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import petegg.BaseTest;
@@ -19,7 +20,8 @@ public class LoginEventServerTest extends BaseTest{
   @Autowired
   private LoginEventServer server;
   
-  public void start(){
+  @Test
+  public void start() throws InterruptedException{
     server.start();
   }
 }
