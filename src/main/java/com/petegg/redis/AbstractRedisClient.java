@@ -24,25 +24,32 @@ import org.springframework.data.redis.core.ValueOperations;
  * @author Peng Yanan
  * @date 2016年8月25日
  */
+
 public class AbstractRedisClient<K, V> {
   @Autowired
-  private RedisTemplate<Serializable, Serializable> redisTemplate;
-  
+  private RedisTemplate<Serializable, Object> redisTemplate;
   
   public void put(K k, V v) {
-    ValueOperations<Serializable, Serializable> valueOper = redisTemplate.opsForValue();
-    valueOper.set((Serializable) k, (Serializable) v);
+    ValueOperations<Serializable, Object> valueOper = redisTemplate.opsForValue();
+    valueOper.set((Serializable) k,  v);
   }
 
   @SuppressWarnings("unchecked")
   public V get(K k) {
-    ValueOperations<Serializable, Serializable> valueOper = redisTemplate.opsForValue();
+    ValueOperations<Serializable, Object> valueOper = redisTemplate.opsForValue();
     return (V) valueOper.get(k);
   }
 
+  /**
+   * 
+   * <p>Description: </p>
+   * @param k
+   * @author Peng Yanan
+   * @date      2016年8月27日
+   */
   public void remove(K k) {
-    ValueOperations<Serializable, Serializable> valueOper = redisTemplate.opsForValue();
-    RedisOperations<Serializable, Serializable> operations = valueOper.getOperations();
+    ValueOperations<Serializable, Object> valueOper = redisTemplate.opsForValue();
+    RedisOperations<Serializable, Object> operations = valueOper.getOperations();
     operations.delete((Serializable) k);
   }
 }

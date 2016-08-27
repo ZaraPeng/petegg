@@ -43,12 +43,13 @@ public class PetInfoRedisClientTest extends BaseTest {
 
   @Test
   public void stringPut() {
-    stringRedis.put("woainiya1111", "helloworld");
+    stringRedis.put("testcache", petService.getById(1l).toString());
   }
 
   @Test
   public void stringGet() {
-    System.out.println(stringRedis.get("123456"));
+    System.out.println(stringRedis.get("testcache"));
+    System.out.println(stringRedis.get("testcache"));
   }
 
   @Test
@@ -79,6 +80,22 @@ public class PetInfoRedisClientTest extends BaseTest {
   @Test
   public void objRemove(){
     objRedisClient.remove("petinfo_id_2");
+  }
+  
+  @Test
+  public void getmessage(){
+    System.out.println("message: " + stringRedis.getMessage("Josh"));
+    
+    //Second method execution using key="Josh", still not cached
+    System.out.println("message: " + stringRedis.getMessage("Josh"));
+
+    //First method execution using key="Joshua", not cached
+    System.out.println("message: " + stringRedis.getMessage("Joshua"));
+
+    //Second method execution using key="Joshua", cached
+    System.out.println("message: " + stringRedis.getMessage("Joshua"));
+
+    System.out.println("Done.");
   }
 
 }

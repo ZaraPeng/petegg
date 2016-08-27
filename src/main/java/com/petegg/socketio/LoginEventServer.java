@@ -86,6 +86,7 @@ public class LoginEventServer {
           throws Exception {
         LoginEventServer.log.info("client[{}] 发送数据 [{}]", client.getSessionId(),
             JSONObject.toJSONString(data));
+        
         redisClient.put(client.getSessionId().toString(), data.getOpenid());
         
         // 业务逻辑 判断改用户是否登陆过
@@ -108,8 +109,4 @@ public class LoginEventServer {
     }
   }
   
-//  public static void main(String args[]) throws InterruptedException{
-//    LoginEventServer server = new LoginEventServer();
-//    server.start();
-//  }
 }
