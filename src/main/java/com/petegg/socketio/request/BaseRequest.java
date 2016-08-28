@@ -16,19 +16,19 @@ public class BaseRequest implements Serializable{
   private static final long serialVersionUID = 356600797179915046L;
   
   private String petInfoId;// 宠物信息id
-  private int eventType; // 动作类型
+  private int actionId; // 动作类型
   public String getPetInfoId() {
     return petInfoId;
   }
   public void setPetInfoId(String petInfoId) {
     this.petInfoId = petInfoId;
   }
-  public int getEventType() {
-    return eventType;
+  public int getActionId() {
+    return actionId;
   }
-  public void setEventType(int eventType) {
-    this.eventType = eventType;
+  public void setActionId(int actionId) {
+    this.actionId = actionId;
   }
-  
+
 }
 

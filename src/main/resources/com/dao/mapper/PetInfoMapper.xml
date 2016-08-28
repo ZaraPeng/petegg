@@ -7,5 +7,4 @@
 		id=#{id}
 	</select>
 
-	<cache type="com.petegg.redis.MybatisRedisCache" />
 </mapper>

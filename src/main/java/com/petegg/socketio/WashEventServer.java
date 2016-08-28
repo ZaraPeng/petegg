@@ -2,6 +2,7 @@ package com.petegg.socketio;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.alibaba.fastjson.JSONObject;
@@ -10,7 +11,11 @@ import com.corundumstudio.socketio.Configuration;
 import com.corundumstudio.socketio.SocketIOClient;
 import com.corundumstudio.socketio.SocketIOServer;
 import com.corundumstudio.socketio.listener.DataListener;
+import com.petegg.Constants;
+import com.petegg.entity.PetStatus;
+import com.petegg.service.bussiness.WashEventService;
 import com.petegg.socketio.request.WashRequest;
+import com.petegg.socketio.response.PetStatusResponse;
 
 /**
  * <p>
@@ -32,6 +37,8 @@ import com.petegg.socketio.request.WashRequest;
 @Component
 public class WashEventServer {
   private static Logger log = LoggerFactory.getLogger(WashEventServer.class);
+  @Autowired
+  private WashEventService washEventService;
   
   public void start() {
     Configuration config = new Configuration();
@@ -49,12 +56,16 @@ public class WashEventServer {
         WashEventServer.log.info("client[{}] 发送数据 [{}]", client.getSessionId(),
             JSONObject.toJSONString(data));
 
-        //业务处理
+        //业务处理更新状态值
+        PetStatus petStatus = washEventService.washAction(Long.parseLong(data.getPetInfoId()),data.getActionId());
         
-        
+        PetStatusResponse response = new PetStatusResponse();
+        response.setPetStatus(petStatus);
+        response.setCode(Constants.CODE_SUCCESS);
+        response.setMsg("洗澡更新状态值成功");
         // 发送给单独客服端
         server.getClient(client.getSessionId()).sendEvent("washEvent",
-            JSONObject.toJSONString(data));
+            JSONObject.toJSONString(response));
       }
 
     });

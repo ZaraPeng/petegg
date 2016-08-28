@@ -48,3 +48,26 @@ CREATE TABLE `pet_cion` (
   PRIMARY KEY (`id`),
   KEY `idx_pet_gamer_id` (`pet_gamer_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='钱币';
+
+CREATE TABLE `pet_status_config` (
+  `id` bigint(30) NOT NULL AUTO_INCREMENT,
+  `action_id` tinyint(4) NOT NULL COMMENT '动作id',
+  `action_id_comment` varchar(100) NOT NULL COMMENT '动作辅助列',
+  `action_type` tinyint(4) NOT NULL COMMENT '类型',
+  `action_type_comment` varchar(100) NOT NULL COMMENT '类型辅助列',
+  `hunger_change` bigint(30) NOT NULL COMMENT '饥饿变化值',
+  `clean_change` bigint(30) NOT NULL COMMENT '清洁变化值',
+  `smarts_change` bigint(30) NOT NULL COMMENT '智慧变化值',
+  `active_change` bigint(30) NOT NULL COMMENT '活力变化值',
+  `energy_change` bigint(30) NOT NULL COMMENT '体力变化值',
+  `happy_change` bigint(30) NOT NULL COMMENT '开心变化值',
+  `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '状态 0 不可以 1 可用',
+  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `modify_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `idx_action_id` (`action_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COMMENT='宠物状态配置表';
+
+INSERT INTO `pet_status_config` (`action_id`, `action_id_comment`, `action_type`, `action_type_comment`, `hunger_change`, `clean_change`, `smarts_change`, `active_change`, `energy_change`, `happy_change`)
+VALUES
+	(1, '洗澡', 1, '单次效果', 0, 30, 0, 0, -15, 10);

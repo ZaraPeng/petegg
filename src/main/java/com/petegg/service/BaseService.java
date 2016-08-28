@@ -1,7 +1,6 @@
 package com.petegg.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import com.petegg.dao.BaseMapper;
 
@@ -13,7 +12,6 @@ import com.petegg.dao.BaseMapper;
  * @author    Peng Yanan
  * @date      2016年8月24日
  */
-@Component
 public class BaseService<T> {
   
   @Autowired

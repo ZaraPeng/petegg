@@ -2,8 +2,6 @@ package com.petegg.entity;
 
 import java.io.Serializable;
 
-import com.mysql.fabric.xmlrpc.base.Data;
-
 /**
  * <p>
  * Title: PetInfo
@@ -33,8 +31,8 @@ public class PetInfo implements Serializable {
   private int stage;
   private int type;
   private boolean status;
-  private Data createTime;
-  private Data modifyTime;
+  private java.sql.Timestamp createTime;
+  private java.sql.Timestamp modifyTime;
 
   public long getId() {
     return id;
@@ -92,19 +90,19 @@ public class PetInfo implements Serializable {
     this.status = status;
   }
 
-  public Data getCreateTime() {
+  public java.sql.Timestamp getCreateTime() {
     return createTime;
   }
 
-  public void setCreateTime(Data createTime) {
+  public void setCreateTime(java.sql.Timestamp createTime) {
     this.createTime = createTime;
   }
 
-  public Data getModifyTime() {
+  public java.sql.Timestamp getModifyTime() {
     return modifyTime;
   }
 
-  public void setModifyTime(Data modifyTime) {
+  public void setModifyTime(java.sql.Timestamp modifyTime) {
     this.modifyTime = modifyTime;
   }
 

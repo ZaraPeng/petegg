@@ -31,6 +31,6 @@ public class WashEventServiceTest extends BaseTest {
 
   @Test
   public void testWashAction() {
-    washEventService.washAction(1l);
+    washEventService.washAction(1l,1);
   }
 }

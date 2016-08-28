@@ -7,7 +7,10 @@ import org.springframework.stereotype.Component;
 
 import com.alibaba.fastjson.JSONObject;
 import com.petegg.entity.PetStatus;
+import com.petegg.entity.PetStatusConfig;
+import com.petegg.service.PetStatusConfigService;
 import com.petegg.service.PetStatusService;
+import com.petegg.util.PetStatusChangeUtils;
 
 /**
  * <p>
@@ -32,6 +35,12 @@ public class WashEventService {
 
   @Autowired
   private PetStatusService petStatusService;
+  
+  @Autowired
+  private PetStatusConfigService petStatusConfigService;
+  
+  @Autowired
+  private PetStatusChangeUtils changeUtils;
 
   /**
    * 
@@ -44,14 +53,14 @@ public class WashEventService {
    * @author Peng Yanan
    * @date 2016年8月24日
    */
-  public PetStatus washAction(long petId) {
-    PetStatus obj = petStatusService.getPetStatus(petId);
-    logger.info("数据库get obj PetStatus [{}]", JSONObject.toJSONString(obj));
-    // TODO 通过配置表来更新状态参数
-    obj.setClean(888l);
-    obj.setHappy(666l);
-    logger.info("更新之后 {}", JSONObject.toJSONString(obj));
-    if (petStatusService.update(obj))
+  public PetStatus washAction(long petId,int actionId) {
+    PetStatus petStatus = petStatusService.getPetStatus(petId);
+    logger.info("数据库get obj PetStatus [{}]", JSONObject.toJSONString(petStatus));
+    // 通过配置表来更新状态参数
+    PetStatusConfig petStatusConfig = petStatusConfigService.getAllConfig().get(actionId);
+    petStatus =changeUtils.change(petStatus, petStatusConfig);
+    logger.info("更新之后 {}", JSONObject.toJSONString(petStatus));
+    if (petStatusService.update(petStatus))
       logger.info("更新数据成功");// 更新数据
     return petStatusService.getPetStatus(petId);
   }

@@ -2,8 +2,6 @@ package com.petegg.entity;
 
 import java.io.Serializable;
 
-import com.mysql.fabric.xmlrpc.base.Data;
-
 /**
  * <p>
  * Title: PetStatus
@@ -34,8 +32,8 @@ public class PetStatus implements Serializable {
   private long active;// 活力值
   private long energy;// 体力值
   private long happy;// 开心值
-  private Data createTime;
-  private Data modifyTime;
+  private java.sql.Timestamp createTime;
+  private java.sql.Timestamp modifyTime;
 
   public PetStatus(){
     
@@ -116,19 +114,19 @@ public class PetStatus implements Serializable {
     this.happy = happy;
   }
 
-  public Data getCreateTime() {
+  public java.sql.Timestamp getCreateTime() {
     return createTime;
   }
 
-  public void setCreateTime(Data createTime) {
+  public void setCreateTime(java.sql.Timestamp createTime) {
     this.createTime = createTime;
   }
 
-  public Data getModifyTime() {
+  public java.sql.Timestamp getModifyTime() {
     return modifyTime;
   }
 
-  public void setModifyTime(Data modifyTime) {
+  public void setModifyTime(java.sql.Timestamp modifyTime) {
     this.modifyTime = modifyTime;
   }
 
