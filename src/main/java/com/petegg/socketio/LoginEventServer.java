@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component;
 
 import com.alibaba.fastjson.JSONObject;
 import com.corundumstudio.socketio.AckRequest;
-import com.corundumstudio.socketio.Configuration;
 import com.corundumstudio.socketio.SocketIOClient;
 import com.corundumstudio.socketio.SocketIOServer;
 import com.corundumstudio.socketio.listener.ConnectListener;
@@ -52,12 +51,7 @@ public class LoginEventServer {
    * @throws InterruptedException 
    * @date 2016年8月24日
    */
-  public void start() throws InterruptedException {
-    Configuration config = new Configuration();
-    config.setHostname("10.0.0.7");
-    config.setPort(9092);
-
-    final SocketIOServer server = new SocketIOServer(config);
+  public void listener(final SocketIOServer server) throws InterruptedException {
 
     // 监听连接事件
     server.addConnectListener(new ConnectListener() {
@@ -84,9 +78,10 @@ public class LoginEventServer {
       @Override
       public void onData(SocketIOClient client, LoginRequest data, AckRequest ackSender)
           throws Exception {
-        LoginEventServer.log.info("client[{}] 发送数据 [{}]", client.getSessionId(),
+        LoginEventServer.log.info("client[{}] 获取的数据 [{}]", client.getSessionId(),
             JSONObject.toJSONString(data));
         
+        //登陆信息加入缓存
         redisClient.put(client.getSessionId().toString(), data.getOpenid());
         
         // 业务逻辑 判断改用户是否登陆过
@@ -101,12 +96,6 @@ public class LoginEventServer {
       }
     });
     
-    // 开启服务
-    server.start();
-    
-    while(true){
-      Thread.sleep(1000);
-    }
   }
   
 }

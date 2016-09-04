@@ -57,7 +57,7 @@ public class WashEventService {
     PetStatus petStatus = petStatusService.getPetStatus(petId);
     logger.info("数据库get obj PetStatus [{}]", JSONObject.toJSONString(petStatus));
     // 通过配置表来更新状态参数
-    PetStatusConfig petStatusConfig = petStatusConfigService.getAllConfig().get(actionId);
+    PetStatusConfig petStatusConfig = petStatusConfigService.getAllConfig().get(1);//actionId=1
     petStatus =changeUtils.change(petStatus, petStatusConfig);
     logger.info("更新之后 {}", JSONObject.toJSONString(petStatus));
     if (petStatusService.update(petStatus))

@@ -7,11 +7,11 @@ import petegg.BaseTest;
 
 import com.corundumstudio.socketio.Configuration;
 import com.corundumstudio.socketio.SocketIOServer;
-import com.petegg.socketio.LoginEventServer;
+import com.petegg.socketio.WashEventServer;
 
 /**
  * <p>
- * Title: LoginEventServerTest
+ * Title: WashEventServerTest
  * </p>
  * <p>
  * Description: petegg.socketio
@@ -24,21 +24,21 @@ import com.petegg.socketio.LoginEventServer;
  * </p>
  * 
  * @author Peng Yanan
- * @date 2016年8月25日
+ * @date 2016年9月4日
  */
-public class LoginEventServerTest extends BaseTest {
+public class WashEventServerTest extends BaseTest {
 
   @Autowired
-  private LoginEventServer loginServer;
+  private WashEventServer washServer;
 
   @Test
-  public void start() throws InterruptedException {
+  public void testStart() throws InterruptedException {
     Configuration config = new Configuration();
     config.setHostname("10.0.0.5");
     config.setPort(9092);
 
     final SocketIOServer server = new SocketIOServer(config);
-    loginServer.listener(server);
+    washServer.listener(server);
 
     // 开启服务
     server.start();

@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component;
 
 import com.alibaba.fastjson.JSONObject;
 import com.corundumstudio.socketio.AckRequest;
-import com.corundumstudio.socketio.Configuration;
 import com.corundumstudio.socketio.SocketIOClient;
 import com.corundumstudio.socketio.SocketIOServer;
 import com.corundumstudio.socketio.listener.DataListener;
@@ -40,12 +39,7 @@ public class WashEventServer {
   @Autowired
   private WashEventService washEventService;
   
-  public void start() {
-    Configuration config = new Configuration();
-    config.setHostname("localhost");
-    config.setPort(9092);
-
-    final SocketIOServer server = new SocketIOServer(config);
+  public void listener(final SocketIOServer server) throws InterruptedException {
 
     // 监听数据事件
     server.addEventListener("washEvent", WashRequest.class, new DataListener<WashRequest>() {
@@ -53,11 +47,11 @@ public class WashEventServer {
       @Override
       public void onData(SocketIOClient client, WashRequest data, AckRequest ackSender)
           throws Exception {
-        WashEventServer.log.info("client[{}] 发送数据 [{}]", client.getSessionId(),
+        WashEventServer.log.info("client[{}] 获取的数据 [{}]", client.getSessionId(),
             JSONObject.toJSONString(data));
 
         //业务处理更新状态值
-        PetStatus petStatus = washEventService.washAction(Long.parseLong(data.getPetInfoId()),data.getActionId());
+        PetStatus petStatus = washEventService.washAction(data.getPetInfoId(),1);
         
         PetStatusResponse response = new PetStatusResponse();
         response.setPetStatus(petStatus);
@@ -69,9 +63,5 @@ public class WashEventServer {
       }
 
     });
-
-
-    // 开启服务
-    server.start();
   }
 }
