@@ -25,7 +25,7 @@ public class PetInfo implements Serializable {
   private static final long serialVersionUID = 6449613218324265655L;
 
   private long id;
-  private long petGamerId;
+  private String weixinOpenid;
   private String name;
   private float weight;
   private int stage;
@@ -40,14 +40,6 @@ public class PetInfo implements Serializable {
 
   public void setId(long id) {
     this.id = id;
-  }
-
-  public long getPetGamerId() {
-    return petGamerId;
-  }
-
-  public void setPetGamerId(long petGamerId) {
-    this.petGamerId = petGamerId;
   }
 
   public String getName() {
@@ -106,11 +98,12 @@ public class PetInfo implements Serializable {
     this.modifyTime = modifyTime;
   }
 
-  @Override
-  public String toString() {
-    return "PetInfo [id=" + id + ", petGamerId=" + petGamerId + ", name=" + name + ", weight="
-        + weight + ", stage=" + stage + ", type=" + type + ", status=" + status + ", createTime="
-        + createTime + ", modifyTime=" + modifyTime + "]";
+  public String getWeixinOpenid() {
+    return weixinOpenid;
+  }
+
+  public void setWeixinOpenid(String weixinOpenid) {
+    this.weixinOpenid = weixinOpenid;
   }
 
 }

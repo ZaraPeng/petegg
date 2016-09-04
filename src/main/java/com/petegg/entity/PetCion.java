@@ -20,13 +20,13 @@ import java.sql.Timestamp;
  * @author Peng Yanan
  * @date 2016年9月4日
  */
-public class PetCoin implements Serializable {
+public class PetCion implements Serializable {
 
   /** serialVersionUID */
   private static final long serialVersionUID = -522557842313159030L;
 
   private long id;
-  private long petGamerId;
+  private String weixinOpenid;
   private long number;
   private Timestamp createTime;
   private Timestamp modifyTime;
@@ -39,12 +39,12 @@ public class PetCoin implements Serializable {
     this.id = id;
   }
 
-  public long getPetGamerId() {
-    return petGamerId;
+  public String getWeixinOpenid() {
+    return weixinOpenid;
   }
 
-  public void setPetGamerId(long petGamerId) {
-    this.petGamerId = petGamerId;
+  public void setWeixinOpenid(String weixinOpenid) {
+    this.weixinOpenid = weixinOpenid;
   }
 
   public long getNumber() {

@@ -14,8 +14,10 @@ import com.corundumstudio.socketio.listener.DataListener;
 import com.corundumstudio.socketio.listener.DisconnectListener;
 import com.petegg.Constants;
 import com.petegg.redis.UserInfoRedisClient;
+import com.petegg.service.bussiness.LoginEventService;
 import com.petegg.socketio.request.LoginRequest;
 import com.petegg.socketio.response.LoginResponse;
+import com.petegg.socketio.vo.LoginVO;
 
 /**
  * <p>
@@ -40,6 +42,9 @@ public class LoginEventServer {
   
   @Autowired
   private UserInfoRedisClient redisClient;
+  
+  @Autowired
+  private LoginEventService loginEventService;
 
   /**
    * 
@@ -84,12 +89,13 @@ public class LoginEventServer {
         //登陆信息加入缓存
         redisClient.put(client.getSessionId().toString(), data.getOpenid());
         
-        // 业务逻辑 判断改用户是否登陆过
-        
+        // 业务逻辑 判断该用户是否登陆过
+        LoginVO resultVO = loginEventService.login(data.getOpenid());
         
         LoginResponse response = new LoginResponse();
         response.setCode(Constants.CODE_SUCCESS);
         response.setMsg("登陆成功");
+        response.setData(resultVO);
         // 发送给单独客服端
         server.getClient(client.getSessionId()).sendEvent("loginEvent",
             JSONObject.toJSONString(response));

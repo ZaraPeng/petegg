@@ -12,20 +12,10 @@ import com.petegg.entity.PetStatus;
  * @author    Peng Yanan
  * @date      2016年8月28日
  */
-public class PetStatusResponse extends BaseResponse implements Serializable{
+public class PetStatusResponse extends BaseResponse<PetStatus> implements Serializable{
 
   /** serialVersionUID*/
   private static final long serialVersionUID = -3825054672130916102L;
-  
-  private PetStatus petStatus;
-
-  public PetStatus getPetStatus() {
-    return petStatus;
-  }
-
-  public void setPetStatus(PetStatus petStatus) {
-    this.petStatus = petStatus;
-  }
   
 }
 

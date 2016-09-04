@@ -54,7 +54,7 @@ public class WashEventServer {
         PetStatus petStatus = washEventService.washAction(data.getPetInfoId(),1);
         
         PetStatusResponse response = new PetStatusResponse();
-        response.setPetStatus(petStatus);
+        response.setData(petStatus);
         response.setCode(Constants.CODE_SUCCESS);
         response.setMsg("洗澡更新状态值成功");
         // 发送给单独客服端

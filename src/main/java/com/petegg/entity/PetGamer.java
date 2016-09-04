@@ -26,7 +26,6 @@ public class PetGamer implements Serializable {
   private static final long serialVersionUID = -4004717001306431880L;
 
   private long id;
-  private long petInfoId;
   private String weixinOpenid;
   private String weixinName;
   private String weixinHeadImage;
@@ -39,14 +38,6 @@ public class PetGamer implements Serializable {
 
   public void setId(long id) {
     this.id = id;
-  }
-
-  public long getPetInfoId() {
-    return petInfoId;
-  }
-
-  public void setPetInfoId(long petInfoId) {
-    this.petInfoId = petInfoId;
   }
 
   public String getWeixinOpenid() {

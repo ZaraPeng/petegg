@@ -71,3 +71,9 @@ CREATE TABLE `pet_status_config` (
 INSERT INTO `pet_status_config` (`action_id`, `action_id_comment`, `action_type`, `action_type_comment`, `hunger_change`, `clean_change`, `smarts_change`, `active_change`, `energy_change`, `happy_change`)
 VALUES
 	(1, '洗澡', 1, '单次效果', 0, 30, 0, 0, -15, 10);
+	
+ALTER TABLE `pet_gamer` DROP COLUMN `pet_info_id`;
+ALTER TABLE `pet_info` ADD COLUMN `weixin_openid` varchar(200) NOT NULL COMMENT '微信openid' AFTER pet_gamer_id;
+ALTER TABLE `pet_info` DROP COLUMN `pet_gamer_id`;
+ALTER TABLE `pet_cion` DROP COLUMN `pet_gamer_id`;
+ALTER TABLE `pet_cion` ADD COLUMN `weixin_openid` varchar(200) NOT NULL COMMENT '微信openid' AFTER pet_gamer_id;

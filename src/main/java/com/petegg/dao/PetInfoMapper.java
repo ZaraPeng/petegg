@@ -1,5 +1,7 @@
 package com.petegg.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 import com.petegg.entity.PetInfo;
@@ -24,4 +26,6 @@ import com.petegg.entity.PetInfo;
 public interface PetInfoMapper {
 
   PetInfo getById(@Param("id") long id);
+  
+  List<PetInfo> getByOpenid(@Param("weixinOpenid") String weixinOpenid);
 }

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.petegg.dao.PetGamerMapper">
+
+	<insert id="add" parameterType="com.petegg.entity.PetGamer"
+		useGeneratedKeys="true" keyProperty="id">
+		<![CDATA[
+		insert into 
+		pet_gamer(weixin_openid, weixin_name, weixin_head_image) 
+		values(#{weixinOpenid}, #{weixinName}, #{weixinHeadImage})
+		]]>
+	</insert>
+
+	<update id="update" parameterType="com.petegg.entity.PetGamer">
+		<![CDATA[
+		update pet_gamer 
+		set 
+		weixin_name=#{weixinName}, weixin_head_image=#{weixinHeadImage} 
+		where weixin_openid =#{weixinOpenid}
+		]]>
+	</update>
+
+
+</mapper>
