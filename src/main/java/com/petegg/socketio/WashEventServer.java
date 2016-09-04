@@ -11,10 +11,10 @@ import com.corundumstudio.socketio.SocketIOClient;
 import com.corundumstudio.socketio.SocketIOServer;
 import com.corundumstudio.socketio.listener.DataListener;
 import com.petegg.Constants;
-import com.petegg.entity.PetStatus;
 import com.petegg.service.bussiness.WashEventService;
 import com.petegg.socketio.request.WashRequest;
-import com.petegg.socketio.response.PetStatusResponse;
+import com.petegg.socketio.response.BaseResponse;
+import com.petegg.socketio.vo.WashVO;
 
 /**
  * <p>
@@ -51,10 +51,12 @@ public class WashEventServer {
             JSONObject.toJSONString(data));
 
         //业务处理更新状态值
-        PetStatus petStatus = washEventService.washAction(data.getPetInfoId(),1);
         
-        PetStatusResponse response = new PetStatusResponse();
-        response.setData(petStatus);
+        WashVO washVO = new WashVO();
+        washVO.setPetStatus(washEventService.washAction(data.getPetInfoId(),1));
+        
+        BaseResponse response = new BaseResponse();
+        response.setData(washVO);
         response.setCode(Constants.CODE_SUCCESS);
         response.setMsg("洗澡更新状态值成功");
         // 发送给单独客服端

@@ -16,7 +16,7 @@ import com.petegg.Constants;
 import com.petegg.redis.UserInfoRedisClient;
 import com.petegg.service.bussiness.LoginEventService;
 import com.petegg.socketio.request.LoginRequest;
-import com.petegg.socketio.response.LoginResponse;
+import com.petegg.socketio.response.BaseResponse;
 import com.petegg.socketio.vo.LoginVO;
 
 /**
@@ -92,7 +92,7 @@ public class LoginEventServer {
         // 业务逻辑 判断该用户是否登陆过
         LoginVO resultVO = loginEventService.login(data.getOpenid());
         
-        LoginResponse response = new LoginResponse();
+        BaseResponse response = new BaseResponse();
         response.setCode(Constants.CODE_SUCCESS);
         response.setMsg("登陆成功");
         response.setData(resultVO);

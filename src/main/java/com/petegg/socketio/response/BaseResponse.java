@@ -19,14 +19,15 @@ import java.io.Serializable;
  * @author Peng Yanan
  * @date 2016年8月24日
  */
-public class BaseResponse<T> implements Serializable {
+public class BaseResponse implements Serializable {
 
   /** serialVersionUID */
   private static final long serialVersionUID = -2616552769881584041L;
 
   private int code;
-  private String msg;
-  private T data;
+  private String msg = "";
+  private long time = System.currentTimeMillis();
+  private Object data;
 
   public int getCode() {
     return code;
@@ -44,13 +45,21 @@ public class BaseResponse<T> implements Serializable {
     this.msg = msg;
   }
 
-  public T getData() {
+  public Object getData() {
     return data;
   }
 
-  public void setData(T data) {
+  public void setData(Object data) {
     this.data = data;
   }
 
-  
+  public long getTime() {
+    return time;
+  }
+
+  public void setTime(long time) {
+    this.time = time;
+  }
+
+
 }
