@@ -34,7 +34,7 @@ public class BossEventServer {
 
   public void start() throws InterruptedException {
     Configuration config = new Configuration();
-    config.setHostname("10.0.0.5");
+    config.setHostname("localhost");
     config.setPort(9092);
 
     final SocketIOServer server = new SocketIOServer(config);
@@ -45,9 +45,10 @@ public class BossEventServer {
 
     // 开启服务
     server.start();
-
+    
     while (true) {
       Thread.sleep(1000);
     }
   }
+  
 }
