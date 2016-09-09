@@ -202,19 +202,19 @@
 	</dependencies>
 
 	<profiles>
-		<!-- <profile> <id>localhost</id> <properties> <filters.env>localhost</filters.env> 
-			</properties> </profile> <profile> <id>dev</id> <activation> <activeByDefault>true</activeByDefault> 
-			</activation> <properties> <filters.env>dev</filters.env> </properties> </profile> -->
 		<profile>
 			<id>localhost</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
 			<properties>
-				<pom.jdbc.url>jdbc:mysql://127.0.0.1:3306/petegg</pom.jdbc.url>
+				<filters.env>localhost</filters.env>
 			</properties>
 		</profile>
 		<profile>
 			<id>dev</id>
 			<properties>
-				<pom.jdbc.url>jdbc:mysql://199.231.214.245:3306/petegg</pom.jdbc.url>
+				<filters.env>dev</filters.env>
 			</properties>
 		</profile>
 	</profiles>
@@ -271,7 +271,9 @@
 				<filtering>true</filtering>
 			</resource>
 		</resources>
-		<!-- <filters> <filter>${basedir}/filters/${filters.env}/jdbc.properties</filter> 
-			</filters> -->
+		<filters>
+			<filter>filters/${filters.env}/jdbc.properties</filter>
+			<filter>filters/${filters.env}/redis.properties</filter>
+		</filters>
 	</build>
 </project>
