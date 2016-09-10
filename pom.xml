@@ -283,7 +283,7 @@
 							<commands>
 								<!-- 杀死原来的进程 -->
 								<command>pkill -f petegg.jar</command>
-								<!-- 重新启动test.jar，程序的输出结果写到nohup.out文件中 -->
+								<!--  重新启动test.jar，程序的输出结果写到nohup.out文件中-->
 								<command>nohup java -jar /root/javaserver/petegg.jar > /root/javaserver/petegg_nohup.out</command>
 							</commands>
 							<!-- 显示运行命令的输出结果 -->
