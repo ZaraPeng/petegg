@@ -39,10 +39,10 @@ import com.petegg.socketio.vo.LoginVO;
 @Component
 public class LoginEventServer {
   private static Logger log = LoggerFactory.getLogger(LoginEventServer.class);
-  
+
   @Autowired
   private UserInfoRedisClient redisClient;
-  
+
   @Autowired
   private LoginEventService loginEventService;
 
@@ -53,7 +53,7 @@ public class LoginEventServer {
    * </p>
    * 
    * @author Peng Yanan
-   * @throws InterruptedException 
+   * @throws InterruptedException
    * @date 2016年8月24日
    */
   public void listener(final SocketIOServer server) throws InterruptedException {
@@ -64,7 +64,7 @@ public class LoginEventServer {
       public void onConnect(SocketIOClient client) {
         // 建立连接 把连接UUID和userID 联系起来
         LoginEventServer.log.info("建立起connect, sessionID={}", client.getSessionId().toString());
-        
+
       }
     });
 
@@ -85,13 +85,13 @@ public class LoginEventServer {
           throws Exception {
         LoginEventServer.log.info("client[{}] 获取的数据 [{}]", client.getSessionId(),
             JSONObject.toJSONString(data));
-        
-        //登陆信息加入缓存
-        redisClient.put(client.getSessionId().toString(), data.getOpenid());
-        
+
+        // 登陆信息加入缓存
+        redisClient.put(data.getOpenid(), client.getSessionId().toString());
+
         // 业务逻辑 判断该用户是否登陆过
         LoginVO resultVO = loginEventService.login(data.getOpenid());
-        
+
         BaseResponse response = new BaseResponse();
         response.setCode(Constants.CODE_SUCCESS);
         response.setMsg("登陆成功");
@@ -101,7 +101,7 @@ public class LoginEventServer {
             JSONObject.toJSONString(response));
       }
     });
-    
+
   }
-  
+
 }

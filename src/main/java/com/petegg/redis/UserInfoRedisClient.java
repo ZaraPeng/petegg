@@ -39,18 +39,18 @@ public class UserInfoRedisClient {
   @Autowired
   private RedisTemplate<Serializable, Object> redisTemplate;
 
-  @CachePut(cacheNames = "userInfo", key = "#uuid")
-  public void put(String uuid, String openid) {
+  @CachePut(cacheNames = "userInfo", key = "#openid")
+  public void put(String openid, String uuid) {
     ValueOperations<Serializable, Object> valueOper = redisTemplate.opsForValue();
-    valueOper.set(uuid, openid);
-    log.info("put object into redis key(uuid[{}]),value(openid[{}])", uuid, openid);
+    valueOper.set(openid, uuid);
+    log.info("put object into redis key[openid:{}], value[uuid:{}],", uuid, openid);
   }
 
-  @Cacheable(cacheNames = "userInfo", key = "#uuid")
-  public String get(String uuid) {
+  @Cacheable(cacheNames = "userInfo", key = "#openid")
+  public String get(String openid) {
     ValueOperations<Serializable, Object> valueOper = redisTemplate.opsForValue();
-    log.info("get uuid from redis key(uuid[{}])", uuid);
-    return (String) valueOper.get(uuid);
+    log.info("get uuid from redis key[openid :{}]", openid);
+    return (String) valueOper.get(openid);
   }
 
   /**
@@ -63,8 +63,8 @@ public class UserInfoRedisClient {
    * @author Peng Yanan
    * @date 2016年8月27日
    */
-  @CacheEvict(cacheNames = "userInfo", key = "#uuid")
-  public void remove(String uuid) {
-    log.info("clear cache key(uuid[{}])", uuid);
+  @CacheEvict(cacheNames = "userInfo", key = "#openid")
+  public void remove(String openid) {
+    log.info("clear cache key(openid[{}])", openid);
   }
 }
