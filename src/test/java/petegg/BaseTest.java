@@ -2,6 +2,7 @@ package petegg;
 
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
@@ -24,6 +25,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:spring-context.xml"})
+@TestPropertySource(properties = {"jdbc.url = jdbc:mysql://127.0.0.1:3306/petegg",
+    "jdbc.username = root", "jdbc.pasword=root", "redis.host =127.0.0.1","redis.port=6379","redis.password="})
 public class BaseTest {
 
 }
