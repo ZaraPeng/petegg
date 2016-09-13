@@ -1,4 +1,4 @@
-package com.petegg.socketio;
+package com.petegg.socketio.bussiness;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,7 +11,8 @@ import com.corundumstudio.socketio.SocketIOClient;
 import com.corundumstudio.socketio.SocketIOServer;
 import com.corundumstudio.socketio.listener.DataListener;
 import com.petegg.Constants;
-import com.petegg.service.bussiness.WashEventService;
+import com.petegg.enume.ActionEnu;
+import com.petegg.service.bussiness.EventService;
 import com.petegg.socketio.request.WashRequest;
 import com.petegg.socketio.response.BaseResponse;
 import com.petegg.socketio.vo.WashVO;
@@ -37,8 +38,8 @@ import com.petegg.socketio.vo.WashVO;
 public class WashEventServer {
   private static Logger log = LoggerFactory.getLogger(WashEventServer.class);
   @Autowired
-  private WashEventService washEventService;
-  
+  private EventService eventService;
+
   public void listener(final SocketIOServer server) throws InterruptedException {
 
     // 监听数据事件
@@ -50,15 +51,15 @@ public class WashEventServer {
         WashEventServer.log.info("client[{}] 获取的数据 [{}]", client.getSessionId(),
             JSONObject.toJSONString(data));
 
-        //业务处理更新状态值
-        
+        // 业务处理更新状态值
+
         WashVO washVO = new WashVO();
-        washVO.setPetStatus(washEventService.washAction(data.getPetInfoId(),1));
-        
+        washVO.setPetStatus(eventService.washAction(data.getPetInfoId(), ActionEnu.WASH.value()));
+
         BaseResponse response = new BaseResponse();
         response.setData(washVO);
         response.setCode(Constants.CODE_SUCCESS);
-        response.setMsg("洗澡更新状态值成功");
+        response.setMsg(ActionEnu.WASH.getMsg() + "更新状态值成功");
         // 发送给单独客服端
         server.getClient(client.getSessionId()).sendEvent("washEvent",
             JSONObject.toJSONString(response));

@@ -5,6 +5,8 @@ import org.springframework.stereotype.Component;
 
 import com.corundumstudio.socketio.Configuration;
 import com.corundumstudio.socketio.SocketIOServer;
+import com.petegg.socketio.bussiness.LoginEventServer;
+import com.petegg.socketio.bussiness.WashEventServer;
 
 /**
  * <p>

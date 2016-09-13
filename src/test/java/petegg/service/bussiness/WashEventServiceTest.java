@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import petegg.BaseTest;
 
-import com.petegg.service.bussiness.WashEventService;
+import com.petegg.service.bussiness.EventService;
 
 /**
  * <p>
@@ -27,7 +27,7 @@ import com.petegg.service.bussiness.WashEventService;
 public class WashEventServiceTest extends BaseTest {
 
   @Autowired
-  private WashEventService washEventService;
+  private EventService washEventService;
 
   @Test
   public void testWashAction() {

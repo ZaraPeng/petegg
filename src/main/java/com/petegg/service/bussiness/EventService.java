@@ -30,8 +30,8 @@ import com.petegg.util.PetStatusChangeUtils;
  * @date 2016年8月24日
  */
 @Component
-public class WashEventService {
-  private Logger logger = LoggerFactory.getLogger(WashEventService.class);
+public class EventService {
+  private Logger logger = LoggerFactory.getLogger(EventService.class);
 
   @Autowired
   private PetStatusService petStatusService;
@@ -45,7 +45,7 @@ public class WashEventService {
   /**
    * 
    * <p>
-   * Description: 洗澡
+   * Description: 动作
    * </p>
    * 
    * @param petId
@@ -57,7 +57,7 @@ public class WashEventService {
     PetStatus petStatus = petStatusService.getPetStatus(petId);
     logger.info("数据库get obj PetStatus [{}]", JSONObject.toJSONString(petStatus));
     // 通过配置表来更新状态参数
-    PetStatusConfig petStatusConfig = petStatusConfigService.getAllConfig().get(1);//actionId=1
+    PetStatusConfig petStatusConfig = petStatusConfigService.getAllConfig().get(actionId);
     petStatus =changeUtils.change(petStatus, petStatusConfig);
     logger.info("更新之后 {}", JSONObject.toJSONString(petStatus));
     if (petStatusService.update(petStatus))

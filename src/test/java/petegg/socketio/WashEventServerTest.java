@@ -7,7 +7,7 @@ import petegg.BaseTest;
 
 import com.corundumstudio.socketio.Configuration;
 import com.corundumstudio.socketio.SocketIOServer;
-import com.petegg.socketio.WashEventServer;
+import com.petegg.socketio.bussiness.WashEventServer;
 
 /**
  * <p>
