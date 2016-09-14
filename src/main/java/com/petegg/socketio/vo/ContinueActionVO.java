@@ -5,17 +5,16 @@ import java.io.Serializable;
 import com.petegg.entity.PetStatus;
 
 /**
- * <p>Title: DinnerVO</p>
+ * <p>Title: ContinueActionVO</p>
  * <p>Description: com.petegg.socketio.vo</p>
  * <p>Copyright: Copyright (c) 2015</p>
  * <p>Company: 客如云</p>
  * @author    Peng Yanan
- * @date      2016年9月13日
+ * @date      2016年9月14日
  */
-public class DinnerVO implements Serializable{
-
+public class ContinueActionVO implements Serializable{
   /** serialVersionUID*/
-  private static final long serialVersionUID = -8613476231737973968L;
+  private static final long serialVersionUID = -1818191152844401281L;
   
   public PetStatus petStatus;
 

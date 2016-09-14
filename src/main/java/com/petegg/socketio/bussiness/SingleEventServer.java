@@ -14,7 +14,7 @@ import com.petegg.enume.ActionEnu;
 import com.petegg.service.bussiness.EventService;
 import com.petegg.socketio.request.SingleActionRequest;
 import com.petegg.socketio.response.BaseResponse;
-import com.petegg.socketio.vo.DinnerVO;
+import com.petegg.socketio.vo.SingleActionVO;
 
 /**
  * <p>Title: SingleEventServer</p>
@@ -43,12 +43,12 @@ public class SingleEventServer {
 
         // 业务处理更新状态值
 
-        DinnerVO dinnerVO = new DinnerVO();
-        dinnerVO.setPetStatus(eventService.washAction(data.getPetInfoId(),
+        SingleActionVO singleActionVO = new SingleActionVO();
+        singleActionVO.setPetStatus(eventService.washAction(data.getPetInfoId(),
             ActionEnu.getById(data.getActionId()).value()));
 
         BaseResponse response = new BaseResponse();
-        response.setData(dinnerVO);
+        response.setData(singleActionVO);
         response.setCode(Constants.CODE_SUCCESS);
         response.setMsg(ActionEnu.getById(data.getActionId()).getMsg() + "更新状态值成功");
         // 发送给单独客服端

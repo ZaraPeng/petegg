@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import com.corundumstudio.socketio.Configuration;
 import com.corundumstudio.socketio.SocketIOServer;
 import com.petegg.socketio.bussiness.LoginEventServer;
-import com.petegg.socketio.bussiness.WashEventServer;
+import com.petegg.socketio.bussiness.SingleEventServer;
 
 /**
  * <p>
@@ -32,7 +32,7 @@ public class BossEventServer {
   private LoginEventServer loginServer;
   
   @Autowired
-  private WashEventServer washServer;
+  private SingleEventServer singleEventServer;
 
   public void start() throws InterruptedException {
     Configuration config = new Configuration();
@@ -43,7 +43,7 @@ public class BossEventServer {
     
     //注册服务
     loginServer.listener(server);
-    washServer.listener(server);
+    singleEventServer.listener(server);
 
     // 开启服务
     server.start();

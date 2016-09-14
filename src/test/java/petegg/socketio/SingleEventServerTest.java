@@ -7,7 +7,7 @@ import petegg.BaseTest;
 
 import com.corundumstudio.socketio.Configuration;
 import com.corundumstudio.socketio.SocketIOServer;
-import com.petegg.socketio.bussiness.WashEventServer;
+import com.petegg.socketio.bussiness.SingleEventServer;
 
 /**
  * <p>
@@ -26,10 +26,10 @@ import com.petegg.socketio.bussiness.WashEventServer;
  * @author Peng Yanan
  * @date 2016年9月4日
  */
-public class WashEventServerTest extends BaseTest {
+public class SingleEventServerTest extends BaseTest {
 
   @Autowired
-  private WashEventServer washServer;
+  private SingleEventServer washServer;
 
   @Test
   public void testStart() throws InterruptedException {
