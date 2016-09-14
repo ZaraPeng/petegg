@@ -77,3 +77,15 @@ ALTER TABLE `pet_info` ADD COLUMN `weixin_openid` varchar(200) NOT NULL COMMENT 
 ALTER TABLE `pet_info` DROP COLUMN `pet_gamer_id`;
 ALTER TABLE `pet_cion` DROP COLUMN `pet_gamer_id`;
 ALTER TABLE `pet_cion` ADD COLUMN `weixin_openid` varchar(200) NOT NULL COMMENT '微信openid' AFTER pet_gamer_id;
+
+INSERT INTO `pet_status_config` (`action_id`, `action_id_comment`, `action_type`, `action_type_comment`, `hunger_change`, `clean_change`, `smarts_change`, `active_change`, `energy_change`, `happy_change`)
+VALUES
+	(2, '吃饭，苹果', 1, '单次效果', -10, 5, 20, 0, 0, 10),
+	(3, '吃饭，面包', 1, '单次效果', -10, 5, 20, 0, 0, 10),
+	(4, '吃饭，冰淇淋', 1, '单次效果', -10, 5, 20, 0, 0, 10),
+	(5, '医疗', 1, '单次效果', 0, 0, 0, 0, 0, -20),
+	(6, '睡觉', 2, '持续性效果', -10, 10, -10, -5, -15, 5),
+	(7, '没有睡觉', 2, '持续性效果', -10, -5, -15, -5, -10, -10),
+	(8, '生病', 4, '叠加状态效果', -30, -30, -30, -20, -30, -30),
+	(9, '死亡', 3, '不变状态效果', 0, 0, 0, 0, 0, 0),
+	(10, '便便', 4, '叠加状态效果', -20, -5, -5, -5, -5, -20);

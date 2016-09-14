@@ -19,7 +19,9 @@ package com.petegg.enume;
  */
 public enum ActionEnu {
 
-  WASH(1, "洗澡"), DINNER_APPLE(2, "吃苹果");
+  WASH(1, "洗澡"), DINNER_APPLE(2, "吃苹果"), DINNER_BREAD(3, "吃面包"), DINNER_ICECREAM(4, "吃冰淇淋"), MEDICAL(
+      5, "医疗"), SLEEP(6, "睡觉"), NO_SLEEP(7, "不睡觉"), SICK(8, "生病"), DEATH(9, "死亡"), BIANBIAN(10,
+      "便便");
 
   private int value;
   private String msg;
