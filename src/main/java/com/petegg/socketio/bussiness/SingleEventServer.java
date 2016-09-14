@@ -3,6 +3,7 @@ package com.petegg.socketio.bussiness;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.alibaba.fastjson.JSONObject;
 import com.corundumstudio.socketio.AckRequest;
@@ -24,6 +25,7 @@ import com.petegg.socketio.vo.SingleActionVO;
  * @author    Peng Yanan
  * @date      2016年9月14日
  */
+@Component
 public class SingleEventServer {
   private static Logger log = LoggerFactory.getLogger(SingleEventServer.class);
   
