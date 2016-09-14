@@ -38,4 +38,12 @@ public enum ActionEnu {
   public String getMsg() {
     return msg;
   }
+
+  public static ActionEnu getById(int actionId) {
+    for (ActionEnu objEnu : values()) {
+      if (objEnu.value() == actionId)
+        return objEnu;
+    }
+    return null;
+  }
 }
