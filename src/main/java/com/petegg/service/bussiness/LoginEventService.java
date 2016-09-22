@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.petegg.aop.BussAnnotation;
 import com.petegg.dao.PetInfoMapper;
 import com.petegg.entity.PetInfo;
 import com.petegg.entity.PetStatus;
@@ -58,6 +59,7 @@ public class LoginEventService {
    * @author Peng Yanan
    * @date 2016年9月4日
    */
+  @BussAnnotation(moduleName="登陆",option="denglu")
   public LoginVO login(String openid) {
     LoginVO result = new LoginVO();
     List<PetInfo> petInfos = petInfoMapper.getByOpenid(openid);

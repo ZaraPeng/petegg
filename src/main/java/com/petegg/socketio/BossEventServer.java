@@ -36,7 +36,8 @@ public class BossEventServer {
 
   public void start() throws InterruptedException {
     Configuration config = new Configuration();
-    config.setHostname("199.231.214.245");
+//    config.setHostname("199.231.214.245");
+    config.setHostname("10.0.0.153");
     config.setPort(9092);
 
     final SocketIOServer server = new SocketIOServer(config);

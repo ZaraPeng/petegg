@@ -12,7 +12,7 @@ import com.corundumstudio.socketio.SocketIOServer;
 import com.corundumstudio.socketio.listener.DataListener;
 import com.petegg.Constants;
 import com.petegg.enume.ActionEnu;
-import com.petegg.service.bussiness.EventService;
+import com.petegg.service.bussiness.SingleActionEventService;
 import com.petegg.socketio.request.ContinueActionRequest;
 import com.petegg.socketio.response.BaseResponse;
 import com.petegg.socketio.vo.ContinueActionVO;
@@ -31,7 +31,7 @@ public class ContinueEventServer {
 private static Logger log = LoggerFactory.getLogger(ContinueEventServer.class);
   
   @Autowired
-  private EventService eventService;
+  private SingleActionEventService eventService;
 
   public void listener(final SocketIOServer server) throws InterruptedException {
 
@@ -47,7 +47,7 @@ private static Logger log = LoggerFactory.getLogger(ContinueEventServer.class);
         // 业务处理更新状态值
 
         ContinueActionVO continueActionVO = new ContinueActionVO();
-        continueActionVO.setPetStatus(eventService.washAction(data.getPetInfoId(),
+        continueActionVO.setPetStatus(eventService.action(data.getPetInfoId(),
             ActionEnu.getById(data.getActionId()).value()));
 
         BaseResponse response = new BaseResponse();
