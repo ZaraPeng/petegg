@@ -59,5 +59,10 @@ public class StringRedisClient {
 
       return "Hello " + name + "!";
   }
+  
+  public void testxxxx(){
+    StringRedisClient client =null;
+    client.get("xxx");
+  }
 
 }

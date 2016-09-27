@@ -97,5 +97,5 @@ public class PetInfoRedisClientTest extends BaseTest {
 
     System.out.println("Done.");
   }
-
+  
 }
